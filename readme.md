@@ -2,7 +2,7 @@
 
 ## Project Idea
 
-## Welcome to the Funniest Ads Collection! This repository lists out hilarious advertisements from various sources. Sit back and enjoy a good laugh with these creative and amusing ads. From clever marketing strategies to unexpected twists, these ads showcase the lighter side of advertising.
+### Welcome to the Funniest Ads Collection! This repository lists out hilarious advertisements from various sources. Sit back and enjoy a good laugh with these creative and amusing ads. From clever marketing strategies to unexpected twists, these ads showcase the lighter side of advertising.
 
 ## Features
 
