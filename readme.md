@@ -6,11 +6,11 @@
 
 ## Features
 
-- **Diverse Collection :**The collection includes ads from different industries, including food, technology, automotive,and more, ensuring a wide variety of humor for everyone.
+**Diverse Collection** : The collection includes ads from different industries, including food, technology, automotive,and more, ensuring a wide variety of humor for everyone.
 
-- **Curated Selection :**Ads are carefully curated to ensure high-quality humor and creativity, providing an enjoyable browsing experience for users.
+**Curated Selection** : Ads are carefully curated to ensure high-quality humor and creativity, providing an enjoyable browsing experience for users.
 
-- **Categorized Content :**Ads are organized into categories or themes, making it easy for users to find the type of humor they enjoy most.
+**Categorized Content** : Ads are organized into categories or themes, making it easy for users to find the type of humor they enjoy most.
 
-- **User Contributions :**Users can contribute their own funny ads to the collection, expanding the repository and sharing their favorite humorous content with others.
+**User Contributions** : Users can contribute their own funny ads to the collection, expanding the repository and sharing their favorite humorous content with others.
 
