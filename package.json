@@ -1,0 +1,12 @@
+{
+  "name": "s51_funniest_ads",
+  "version": "1.0.0",
+  "description": "**Welcome to the Funniest Ads Collection! This repository lists out hilarious advertisements from various sources. Sit back, relax, and enjoy a good laugh with these creative and amusing ads.**",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
