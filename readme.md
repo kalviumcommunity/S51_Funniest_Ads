@@ -1,3 +1,0 @@
-# Funniest_Ads
-
-
