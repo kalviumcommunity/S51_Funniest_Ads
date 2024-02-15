@@ -13,3 +13,4 @@
 - Ads are organized into categories or themes, making it easy for users to find the type of humor they enjoy most.
 
 - Users can contribute their own funny ads to the collection, expanding the repository and sharing their favorite humorous content with others.
+
