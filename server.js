@@ -9,6 +9,10 @@ app.get('', (req, res) =>{
   res.send("You are looking into a blank page")
 })
 
+app.use((req, res) => {
+  res.status(404).send("ERROR")
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
