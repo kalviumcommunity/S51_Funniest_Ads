@@ -16,6 +16,6 @@
 
 ## [Deployment Link](https://s51-funniest-ads.onrender.com) 🚀
 
-Sit back, relax, and let the laughter begin!... 😄
+Sit back, relax, and let the laughter begin! 😄
 
 
