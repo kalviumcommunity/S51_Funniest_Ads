@@ -1,6 +1,6 @@
 # Funniest_Ads
 
-## Welcome to the Funniest Ads Collection 😄
+## Welcome to the Funniest Ads Collection! 😄
 
 **Get ready to laugh out loud with our handpicked selection of hilarious advertisements from various sources! Whether you're a fan of witty one-liners, clever visuals, or just need a good chuckle, we've got you covered. Sit back, relax, and enjoy a good laugh with these creative and amusing ads.**
 
