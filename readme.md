@@ -6,7 +6,7 @@
 
 ## Features 🌟
 
-- **Diverse Collection:** Explore ads from different industries like technology, automotive, and more, ensuring there's something funny for everyone.
+- **Diverse Collection:** Explore ads from different industries like food, technology, automotive, and more, ensuring there's something funny for everyone.
 
 - **Curated Selection:** Our ads are carefully curated to guarantee high-quality humor and creativity, ensuring an enjoyable browsing experience for users.
 
