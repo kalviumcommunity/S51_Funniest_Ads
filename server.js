@@ -10,7 +10,7 @@ connectToDB()
 app.get('/ping', (req, res) => {
     res.send("Hello World")
 })
-app.get('/', (req, res) =>{
+app.get('', (req, res) =>{
   res.send("You are looking into a blank page")
 })
 
