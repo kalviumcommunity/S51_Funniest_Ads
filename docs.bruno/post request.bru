@@ -1,0 +1,22 @@
+meta {
+  name: post request
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:3000/postData
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+  "id": 11,
+  "user_name":"buzzIn",
+  "email":"buzzIn@gmail.com",
+  "Watched_videos":"Funniest Fails-3",
+  "Likes":"9 likes",
+  "Comments":"3 comments"
+  }
+}

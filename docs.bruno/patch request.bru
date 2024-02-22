@@ -1,0 +1,18 @@
+meta {
+  name: patch request
+  type: http
+  seq: 4
+}
+
+patch {
+  url: http://localhost:3000/patch/11
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "user_name": "buzzOut",
+      "email": "buzzOut@gmail.com"
+    }
+}
