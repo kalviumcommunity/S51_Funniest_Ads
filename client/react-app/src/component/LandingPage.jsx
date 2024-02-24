@@ -1,5 +1,5 @@
 // import React from "react";
-import './LandingPage.css'
+import './LandingPage.module.css'
 
 export const LandingPage = () => {
     return <div>
