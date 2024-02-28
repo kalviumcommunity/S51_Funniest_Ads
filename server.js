@@ -1,7 +1,7 @@
 const express = require('express')
 const mongoose = require("mongoose")
 const router = require('./routers/routes.js')
-
+const cors = require("cors")
 const connectToDB  = require("./dbConnect.js")
 
 const dotenv = require("dotenv")
@@ -12,6 +12,7 @@ const port = 3000
 connectToDB()
 
 app.use(express.json())
+app.use(cors())
 app.use('/', router)
 
 app.get('/ping', (req, res) => {
