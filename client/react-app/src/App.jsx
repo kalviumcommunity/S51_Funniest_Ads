@@ -11,9 +11,9 @@ function App() {
     <>
 
       <LandingPage />
-        <Dummy/>
-        <DBToFrontend/>
-      {/* <Form/> */}
+        {/* <Dummy/>
+        <DBToFrontend/> */}
+      <Form/>
 
     </>
   )
