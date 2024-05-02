@@ -18,7 +18,7 @@ app.get('/api/users', async (req, res) => {
         res.json(users);
     } catch (err) {
         console.error("Error fetching users:", err);
-        res.status(500).send("Error fetching users from the database");
+        res.status(500).send("Error fetching users from database");
     }
 });
 
