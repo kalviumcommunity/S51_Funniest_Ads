@@ -1,0 +1,14 @@
+.box {
+    display: grid;
+    grid-template-columns: repeat(2, 60%);
+    flex-direction: column;
+    text-align: start;
+    row-gap: 5%;
+  }
+  .container{
+    margin-top: 20%;
+  }
+  
+  
+  
+  

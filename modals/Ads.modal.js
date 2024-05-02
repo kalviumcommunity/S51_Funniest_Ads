@@ -13,3 +13,5 @@ const profile = new mongoose.Schema({
 const model = mongoose.model('FunniestAds_Collection', profile)
 
 module.exports = model
+
+

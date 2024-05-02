@@ -1,12 +1,19 @@
-import {LandingPage} from './component/LandingPage'
 import './App.css'
+import {LandingPage} from './component/LandingPage'
 import Dummy from './Dummy'
+import DBToFrontend from './component/DBToFrontend'
+import Form from './component/Form'
+
 
 function App() {
+
   return (
     <>
+
       <LandingPage />
-      <Dummy/>
+        <Dummy/>
+        <DBToFrontend/>
+      {/* <Form/> */}
 
     </>
   )

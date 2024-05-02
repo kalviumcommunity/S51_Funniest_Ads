@@ -3,7 +3,7 @@ const router = express.Router()
 const Model = require("../modals/Ads.modal")
 
 router.get('/getData', async(req, res) => {
-    try{
+    try{vs
         const getProfile = await Model.find()
         res.status(200).json(getProfile)
     } catch(error) {
