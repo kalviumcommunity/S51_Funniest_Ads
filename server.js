@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require("mongoose");
 const cors = require("cors");
+const cookie = require("cookie-parser")
 const User = require('./modals/UserModal.js');
 const joi = require('joi');
 
@@ -10,6 +11,7 @@ const port = 3000;
 
 app.use(express.json());
 app.use(cors());
+app.use(cookie())
 
 // GET request 
 app.get('/api/users', async (req, res) => {
@@ -103,6 +105,7 @@ app.get('/', (req, res) => {
 app.use((req, res) => {
     res.status(404).send("ERROR");
 });
+
 
 mongoose.connect("mongodb+srv://adityakannur:Aditya252004@cluster0.5zhqbdd.mongodb.net/FunniestAds_Database?retryWrites=true&w=majority")
     .then(() => {
