@@ -48,29 +48,33 @@ const schema = joi.object({
 
 // POST request 
 app.post('/createUser', async (req, res) => {
-    try {
-        // Validate request body against the schema
-        const { error, value } = schema.validate(req.body);
-        if (error) {
-            // If validation fails, return 400 Bad Request with validation error details
-            console.log("no")
-            return res.status(400).json({ error: error.details[0].message });
-        }
-        else {
-            console.log(value)
-            console.log("yes")
-        }
+  try {
+      // Validate request body against the schema
+      const { error, value } = schema.validate(req.body);
+      if (error) {
+          // If validation fails, return 400 Bad Request with validation error details
+          return res.status(400).json({ error: error.details[0].message });
+      }
 
-
-        // If validation succeeds, proceed with creating the user
-        const newUser = new User(value); // Use validated data
-        await newUser.save();
-        res.status(201).json(newUser);
-    } catch (err) {
-        console.error("Error creating user:", err);
-        res.status(500).send("Error creating user in the database");
-    }
+      // If validation succeeds, proceed with creating the user
+      const firstname = req.body.firstname;
+      if (!firstname) {
+          return res.status(400).json({ error: "Firstname is required" });
+      }
+      
+      // Set the 'username' as a cookie
+      res.cookie('username', firstname);
+      // Create the user
+      const newUser = new User(value); // Use validated data
+      await newUser.save();
+      // Send success response
+      return res.status(201).json({ message: "User created and cookie set" });
+  } catch (err) {
+      console.error("Error creating user:", err);
+      res.status(500).send("Error creating user in the database");
+  }
 });
+
 
 // PUT request by id
 app.put('/api/users/:id', async (req, res) => {
