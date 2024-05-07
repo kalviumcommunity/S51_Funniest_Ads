@@ -27,7 +27,8 @@ app.get('/api/users', async (req, res) => {
 // GET request by id
 app.get('/api/users/:id', async (req, res) => {
     try {
-        const user = await User.findById(req.params.id);
+        const id = req.params.id;
+        const user = await User.findById({_id:id}); // Just pass the id directly
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
@@ -38,6 +39,7 @@ app.get('/api/users/:id', async (req, res) => {
     }
 });
 
+
 const schema = joi.object({
     firstname : joi.string().required(),
     lastname : joi.string().required(),
@@ -47,33 +49,34 @@ const schema = joi.object({
   })
 
 // POST request 
-app.post('/createUser', async (req, res) => {
-  try {
+app.post('/createUsers', async (req, res) => {
+    try {
       // Validate request body against the schema
       const { error, value } = schema.validate(req.body);
       if (error) {
-          // If validation fails, return 400 Bad Request with validation error details
-          return res.status(400).json({ error: error.details[0].message });
+        // If validation fails, return 400 Bad Request with validation error details
+        console.log("Validation error:", error.details[0].message);
+        return res.status(400).json({ error: error.details[0].message });
       }
-
-      // If validation succeeds, proceed with creating the user
-      const firstname = req.body.firstname;
-      if (!firstname) {
-          return res.status(400).json({ error: "Firstname is required" });
-      }
-      
+  
+      const { firstname } = req.body;
+  
       // Set the 'username' as a cookie
       res.cookie('username', firstname);
+  
       // Create the user
-      const newUser = new User(value); // Use validated data
+      const newUser = new User(req.body); // Use validated data
       await newUser.save();
+  
       // Send success response
-      return res.status(201).json({ message: "User created and cookie set" });
-  } catch (err) {
+      console.log("Validation successful");
+      return res.status(201).json({ message: "User created and cookie created" });
+    } catch (err) {
       console.error("Error creating user:", err);
-      res.status(500).send("Error creating user in the database");
-  }
-});
+      return res.status(500).send("Error creating user in the database");
+    }
+  });
+  
 
 
 // PUT request by id
@@ -90,8 +93,9 @@ app.put('/api/users/:id', async (req, res) => {
 // DELETE request by id
 app.delete('/api/users/:id', async (req, res) => {
     try {
+        res.clearCookie('username');
         const deletedUser = await User.findByIdAndDelete(req.params.id);
-        res.json(deletedUser);
+        return res.json({ deletedUser, message: 'User and cookie deleted successfully' });
     } catch (err) {
         console.error("Error deleting user:", err);
         res.status(500).send("Error deleting user from the database");

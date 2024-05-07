@@ -4,6 +4,7 @@
   "description": "**Welcome to the Funniest Ads Collection! This repository lists out hilarious advertisements from various sources. Sit back, relax, and enjoy a good laugh with these creative and amusing ads.**",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
