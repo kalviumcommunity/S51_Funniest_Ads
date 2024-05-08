@@ -61,7 +61,7 @@ app.post('/createUser', async (req, res) => {
 
 
         // If validation succeeds, proceed with creating the user
-        const newUser = new User(value); // Use validated data
+        const newUser = new User(value); 
         await newUser.save();
         res.status(201).json(newUser);
     } catch (err) {
