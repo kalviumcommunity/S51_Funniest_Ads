@@ -1,0 +1,45 @@
+.landing-page {
+  background-color: rgb(51, 51, 50);
+  font-family: sans-serif; 
+  margin: 0 auto; 
+  padding: 20px; 
+  width: 100%;
+}
+
+h1 {
+  color: rgb(236, 175, 84);
+  text-align: center;
+  margin-bottom: 10px; 
+}
+
+.greeting {
+  color: blueviolet;
+  text-align: center; 
+  margin-bottom: 20px; 
+}
+
+.blocks-container {
+  border: 1px solid white;
+  padding: 10px; 
+  margin-bottom: 20px; 
+
+.item-container {
+  border: 1px solid blue;
+  background-color: pink;
+  padding: 10px; 
+  margin-bottom: 10px;
+}  
+.blocks-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 33%);
+  justify-content: space-between; 
+}
+
+.buttons-container {
+  display: flex; 
+}
+
+.buttons-container button {
+  margin-right: 10px; 
+}
+}
