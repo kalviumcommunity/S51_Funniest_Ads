@@ -4,10 +4,13 @@ import './Form.css';
 import axios from 'axios'
 import { Link } from 'react-router-dom';
 
-
 function Forms() {
     const { register, handleSubmit, formState: { errors, isSubmitSuccessful } } = useForm();
     const [submittedData, setSubmittedData] = useState(null);
+
+    function deleteCookie() {
+        document.cookie = 'username=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
+    }
 
     function submit(data) {
         setSubmittedData(data); 
@@ -19,7 +22,11 @@ function Forms() {
             email: data.email,
             password: data.password
         })
-        .then(result => console.log(result))
+        .then((res) => {
+            console.log(res);
+            const timestamp = Date.now();
+            document.cookie = `username_${timestamp}=${data.firstname}`;
+        })
         .catch(error => console.error(error));
     }
 
@@ -81,7 +88,7 @@ function Forms() {
                 </div>
 
                 <input type='submit' value="Register" className="submit-btn" />
-                {isSubmitSuccessful && <button><Link to='/'>go back</Link></button>}
+                {isSubmitSuccessful && <button><Link to='/'>Go back</Link></button>}
 
             </form>
         </div>
