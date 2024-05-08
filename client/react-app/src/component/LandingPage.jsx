@@ -56,8 +56,8 @@ const LandingPage = () => {
                                     <strong>Name:</strong> {item.firstname} {item.lastname}
                                 </p>
                                 <p><strong>Email:</strong> {item.email}</p>
-                                <p><strong>Watched Videos:</strong> </p>
-                                <p><strong>Likes:</strong> </p>
+                                {/* <p><strong>Watched Videos:</strong> </p>
+                                <p><strong>Likes:</strong> </p> */}
                                 <div className="buttons-container">
                                     <button><Link to={`update/${item._id}`}>Update item</Link></button>
                                     <button onClick={(e) => handleDelete(item._id)}>Delete item</button>
