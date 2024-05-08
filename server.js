@@ -39,7 +39,6 @@ app.get('/api/users/:id', async (req, res) => {
     }
 });
 
-
 const schema = joi.object({
     firstname : joi.string().required(),
     lastname : joi.string().required(),
@@ -48,6 +47,7 @@ const schema = joi.object({
     .max(20) // Maximum length of 30 characters
   })
 
+  
 // POST request 
 app.post('/createUsers', async (req, res) => {
     try {
