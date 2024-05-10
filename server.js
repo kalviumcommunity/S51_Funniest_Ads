@@ -96,7 +96,6 @@ app.put('/api/users/:id', async (req, res) => {
 // DELETE request by id
 app.delete('/api/users/:id', async (req, res) => {
     try {
-        res.clearCookie('username');
         const deletedUser = await User.findByIdAndDelete(req.params.id);
         return res.json({ deletedUser, message: 'User and cookie deleted successfully' });
     } catch (err) {

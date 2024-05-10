@@ -30,12 +30,10 @@ const LandingPage = () => {
         fetchData();
     }, []);
 
-    const handleDelete = (id) => {
+    const handleDelete = (id, firstname) => {
         axios.delete('http://localhost:3000/api/users/' +id)
             .then(res => {
                 console.log(res);
-                document.cookie = 'username=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
-                // window.location.reload();
             })
             .catch(err => console.log(err));
     }
@@ -56,11 +54,12 @@ const LandingPage = () => {
                                     <strong>Name:</strong> {item.firstname} {item.lastname}
                                 </p>
                                 <p><strong>Email:</strong> {item.email}</p>
+                                {/* <p><button onClick={(e) => {deleteCookie(firstname)}}> delete</button></p> */}
                                 {/* <p><strong>Watched Videos:</strong> </p>
                                 <p><strong>Likes:</strong> </p> */}
                                 <div className="buttons-container">
                                     <button><Link to={`update/${item._id}`}>Update item</Link></button>
-                                    <button onClick={(e) => handleDelete(item._id)}>Delete item</button>
+                                    <button>Delete item</button>
                                 </div>
                             </div>
                         ))}

@@ -8,10 +8,6 @@ function Forms() {
     const { register, handleSubmit, formState: { errors, isSubmitSuccessful } } = useForm();
     const [submittedData, setSubmittedData] = useState(null);
 
-    function deleteCookie() {
-        document.cookie = 'username=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
-    }
-
     function submit(data) {
         setSubmittedData(data); 
         console.log(data);
@@ -25,15 +21,16 @@ function Forms() {
         .then((res) => {
             console.log(res);
             const timestamp = Date.now();
-            document.cookie = `username_${timestamp}=${data.firstname}`;
+            document.cookie = `username_${timestamp}=${data.firstname} ; path=/`;
         })
         .catch(error => console.error(error));
     }
-
+ 
     return (
         <div>
             <form onSubmit={handleSubmit(submit)} className="form-container">
                 {isSubmitSuccessful && <div className="success-message">Registration Successful</div>}
+                <button onClick={deletee("username")}>dfuhj</button>
 
                 <div className="form-group">
                     <label htmlFor='firstname'>Enter your firstname</label>
