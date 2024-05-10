@@ -14,7 +14,10 @@
 
 - **Community Contributions:** Share your favorite funny ads with us! Contribute your own humorous content to the collection and spread the laughter even further.
 
-## [Deployment Link](https://s51-funniest-ads.onrender.com) 🚀
+# Deplyments Links
+
+## [Reder Deployment Link](https://s51-funniest-ads.onrender.com) 🚀
+## [Vercel Deploymen Link](https://s51funniest-1zpxa3jz9-aditya-kannurs-projects.vercel.app/)
 
 Sit back, relax, and let the laughter begin! 😄
 
