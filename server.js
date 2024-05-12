@@ -61,12 +61,12 @@ app.post('/createUsers', async (req, res) => {
         const { firstname, lastname } = req.body;
 
         // Check if the 'username' cookie is set before creating the cookie
-        const existingCookie = req.cookies.username;
+        const existingCookie = req.cookies.lastname;
         if (existingCookie) {
             console.log(`Cookie already exists: ${existingCookie}`);
         } else {
             // Set the 'username' cookie only if it doesn't exist
-            res.cookie("username", firstname);
+            res.cookie(lastname, firstname);
         }
 
         const newUser = new User(req.body); // Use validated data
@@ -101,8 +101,13 @@ app.delete('/api/users/:id', async (req, res) => {
       // Delete the 'username' cookie (if it exists)
     //   const { firstname, lastname } = req.body;
 
-    res.clearCookie("username");
-
+    // const existingCookie = req.cookies.lastname;
+    // if (existingCookie) {
+    //     console.log(`Cookie`);
+    // } else {
+    //     // Set the 'username' cookie only if it doesn't exist
+    //     res.clearCookie(req.cookies.lastname);
+    // } 
   
       return res.json({ deletedUser, message: 'User and cookie deleted successfully' });
     } catch (err) {
