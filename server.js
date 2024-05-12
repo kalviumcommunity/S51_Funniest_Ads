@@ -58,7 +58,7 @@ app.post('/createUsers', async (req, res) => {
             return res.status(400).json({ error: error.details[0].message });
         }
 
-        const { firstname } = req.body;
+        const { firstname, lastname } = req.body;
 
         // Check if the 'username' cookie is set before creating the cookie
         const existingCookie = req.cookies.username;
@@ -66,7 +66,7 @@ app.post('/createUsers', async (req, res) => {
             console.log(`Cookie already exists: ${existingCookie}`);
         } else {
             // Set the 'username' cookie only if it doesn't exist
-            res.cookie('username', firstname);
+            res.cookie("username", firstname);
         }
 
         const newUser = new User(req.body); // Use validated data
@@ -96,13 +96,21 @@ app.put('/api/users/:id', async (req, res) => {
 // DELETE request by id
 app.delete('/api/users/:id', async (req, res) => {
     try {
-        const deletedUser = await User.findByIdAndDelete(req.params.id);
-        return res.json({ deletedUser, message: 'User and cookie deleted successfully' });
+      const deletedUser = await User.findByIdAndDelete(req.params.id);
+  
+      // Delete the 'username' cookie (if it exists)
+    //   const { firstname, lastname } = req.body;
+
+    res.clearCookie("username");
+
+  
+      return res.json({ deletedUser, message: 'User and cookie deleted successfully' });
     } catch (err) {
-        console.error("Error deleting user:", err);
-        res.status(500).send("Error deleting user from the database");
+      console.error("Error deleting user:", err);
+      res.status(500).send("Error deleting user from the database");
     }
-});
+  });
+  
 
 app.get('/ping', (req, res) => {
     res.send("Hello World");

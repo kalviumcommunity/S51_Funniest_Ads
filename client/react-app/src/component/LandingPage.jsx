@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './LandingPage.css'; 
 import { Link } from 'react-router-dom';
+import cookies from 'js-cookie'
+
 
 const LandingPage = () => {
     const API_URL = `http://localhost:3000/api/users/`;
@@ -30,19 +32,25 @@ const LandingPage = () => {
         fetchData();
     }, []);
 
-    const handleDelete = (id, firstname) => {
+    const handleDelete = (id) => {
         axios.delete('http://localhost:3000/api/users/' +id)
             .then(res => {
-                console.log(res);
+                console.log(res); 
+                cookies.remove("username") 
+                window.location.reload()
             })
             .catch(err => console.log(err));
     }
+    //  const deleteCookie = () => {
+    //     // document.cookie = `${data.lastname}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`
+    // }
 
     return (
         <div className="landing-page">
             <h1>Hello there!</h1>
             <div className="greeting">Welcome to my project page</div>
             <button><Link to='/create'>Add</Link></button>
+            {/* <button onClick={deleteCookie}>De</button> */}
             {isLoading && <p>Loading data...</p>}
             {error && <p className="error-message">Error: {error.message}</p>}
             {data && (
@@ -59,7 +67,7 @@ const LandingPage = () => {
                                 <p><strong>Likes:</strong> </p> */}
                                 <div className="buttons-container">
                                     <button><Link to={`update/${item._id}`}>Update item</Link></button>
-                                    <button>Delete item</button>
+                                    <button onClick={(e) => {handleDelete(item._id)}}>Delete item</button>
                                 </div>
                             </div>
                         ))}
