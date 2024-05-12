@@ -1,1 +1,12 @@
+### Login Request ###
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "username": "jack",
+    "password": "12345"
+}
+
+### Protected Endpoint Request ###
 GET http://localhost:3000/protected
+Cookie: token=yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxNTUxNTQ3NCwiZXhwIjoxNzE1NTE5MDc0fQ.egmApUNNgi9DwqzPnDBqwr62H3M6SfyaeGI0Hfxe9AI
