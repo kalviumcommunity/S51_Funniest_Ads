@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import './Form.css'; 
 import axios from 'axios'
 import { Link } from 'react-router-dom';
-
+import cookies from 'js-cookie'
 
 function Forms() {
     const { register, handleSubmit, formState: { errors, isSubmitSuccessful } } = useForm();
     const [submittedData, setSubmittedData] = useState(null);
 
-    function submit(data) {
+    const submit = (data) => {
         setSubmittedData(data); 
         console.log(data);
        
@@ -19,14 +19,30 @@ function Forms() {
             email: data.email,
             password: data.password
         })
-        .then(result => console.log(result))
+        .then((res) => {
+            console.log(res);
+            // const timestamp = Date.now();
+            // document.cookie = `${data.lastname}=${data.firstname} ; path=/`;
+            cookies.set("username", data.lastname)
+            
+        })
         .catch(error => console.error(error));
-    }
+    };
 
+    // useEffect((data) => {
+    //     submit(data)
+    // }, [])
+
+    // const deleteCookie = () => {
+    //     // document.cookie = `${data.lastname}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`
+    //     cookies.remove("some")
+    // }
+ 
     return (
         <div>
             <form onSubmit={handleSubmit(submit)} className="form-container">
                 {isSubmitSuccessful && <div className="success-message">Registration Successful</div>}
+                {/* <button onClick={deletee("username")}>dfuhj</button> */}
 
                 <div className="form-group">
                     <label htmlFor='firstname'>Enter your firstname</label>
@@ -81,7 +97,8 @@ function Forms() {
                 </div>
 
                 <input type='submit' value="Register" className="submit-btn" />
-                {isSubmitSuccessful && <button><Link to='/'>go back</Link></button>}
+                {isSubmitSuccessful && <button><Link to='/'>Go back</Link></button>}
+                {/* <button onClick={deleteCookie}>delete</button> */}
 
             </form>
         </div>
@@ -89,3 +106,4 @@ function Forms() {
 }
 
 export default Forms;
+ 
