@@ -1,73 +1,138 @@
 const express = require('express');
-const jwt = require('jsonwebtoken');
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
+const mongoose = require("mongoose");
+const cors = require("cors");
+const cookie = require("cookie-parser")
+const User = require('./modals/UserModal.js');
+const joi = require('joi');
+
 
 const app = express();
-app.use(bodyParser.json());
-app.use(cookieParser());
+const port = 3000;
 
+app.use(express.json());
+app.use(cors());
+app.use(cookie())
 
-
-// Secret key for JWT token signing (should be securely stored)
-const JWT_SECRET = 'aditya';
-
-// Dummy user database (replace this with a real one)
-const users = [
-    { id: 1, username: 'jack', password: '12345' },
-    { id: 2, username: 'jill', password: '98765' }
-];
-
-// Endpoint for user authentication
-app.post('/login', (req, res) => {
-    const { username, password } = req.body;
-
-    // Dummy authentication logic
-    const user = users.find(u => u.username === username && u.password === password);
-    if (!user) {
-        return res.status(401).json({ message: 'Invalid username or password' });
+// GET request 
+app.get('/api/users', async (req, res) => {
+    try {
+        const users = await User.find();
+        res.json(users);
+    } catch (err) {
+        console.error("Error fetching users:", err);
+        res.status(500).send("Error fetching users from database");
     }
-
-    // Generate JWT token
-    const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: '1h' });
-
-    // Set the token as a cookie
-    res.cookie('token', token, { httpOnly: true });
-
-    // Return success response with token
-    res.json({ message: 'Login successful', token });
 });
 
-// Example protected endpoint
-app.get('/protected', (req, res) => {
-    // Extract token from cookie
-    const token = req.cookies.token;
-
-    if (!token) {
-        return res.status(401).json({ message: 'Unauthorized' });
-    }
-
+// GET request by id
+app.get('/api/users/:id', async (req, res) => {
     try {
-        // Verify token
-        const decoded = jwt.verify(token, JWT_SECRET);
-
-        // Find the user based on the decoded user ID
-        const user = users.find(u => u.id === decoded.userId);
-
+        const id = req.params.id;
+        const user = await User.findById({_id:id}); // Just pass the id directly
         if (!user) {
-            return res.status(401).json({ message: 'Unauthorized' });
+            return res.status(404).json({ message: "User not found" });
+        }
+        res.json(user);
+    } catch (err) {
+        console.error("Error fetching user:", err);
+        res.status(500).send("Error fetching user from the database");
+    }
+});
+
+
+const schema = joi.object({
+    firstname : joi.string().required(),
+    lastname : joi.string().required(),
+    email : joi.string().email().required(),
+    password : joi.string().min(8) // Minimum length of 8 characters
+    .max(20), // Maximum length of 30 characters
+    country : joi.string()
+  })
+
+// POST request
+app.post('/createUsers', async (req, res) => {
+    try {
+        // Validate request body against the schema
+        const { error, value } = schema.validate(req.body);
+        if (error) {
+            console.log("Validation error:", error.details[0].message);
+            return res.status(400).json({ error: error.details[0].message });
         }
 
-        // If token is valid, send response with username and user ID
-        res.json({ message: 'Access granted to protected resource', username: user.username, userId: decoded.userId });
-    } catch (error) {
-        // If token is invalid, return unauthorized
-        return res.status(401).json({ message: 'Unauthorized' });
+        const { firstname, lastname } = req.body;
+
+        // Check if the 'username' cookie is set before creating the cookie
+        const existingCookie = req.cookies.username;
+        if (existingCookie) {
+            console.log(`Cookie already exists: ${existingCookie}`);
+        } else {
+            // Set the 'username' cookie only if it doesn't exist
+            res.cookie("username", firstname);
+        }
+
+        const newUser = new User(req.body); // Use validated data
+        await newUser.save();
+
+        console.log("Validation successful");
+        return res.status(201).json({ message: "User created and cookie created (if it didn't exist before)" });
+    } catch (err) {
+        console.error("Error creating user:", err);
+        return res.status(500).send("Error creating user in the database");
+    }
+});
+  
+
+
+// PUT request by id
+app.put('/api/users/:id', async (req, res) => {
+    try {
+        const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        res.json(updatedUser);
+    } catch (err) {
+        console.error("Error updating user:", err);
+        res.status(500).send("Error updating user in the database");
     }
 });
 
+// DELETE request by id
+app.delete('/api/users/:id', async (req, res) => {
+    try {
+      const deletedUser = await User.findByIdAndDelete(req.params.id);
+  
+      // Delete the 'username' cookie (if it exists)
+    //   const { firstname, lastname } = req.body;
 
-// Start the server
-app.listen(3000, () => {
-    console.log('Server is running on port 3000');
+    res.clearCookie("username");
+
+  
+      return res.json({ deletedUser, message: 'User and cookie deleted successfully' });
+    } catch (err) {
+      console.error("Error deleting user:", err);
+      res.status(500).send("Error deleting user from the database");
+    }
+  });
+  
+
+app.get('/ping', (req, res) => {
+    res.send("Hello World");
 });
+
+app.get('/', (req, res) => {
+    res.send("You are looking into a blank page");
+});
+
+app.use((req, res) => {
+    res.status(404).send("ERROR");
+});
+
+
+mongoose.connect("mongodb+srv://adityakannur:Aditya252004@cluster0.5zhqbdd.mongodb.net/FunniestAds_Database?retryWrites=true&w=majority")
+    .then(() => {
+        console.log("Connected to MongoDB Atlas");
+        app.listen(port, () => {
+            console.log(`Server started on port ${port}`);
+        });
+    })
+    .catch(error => {
+        console.error("Error connecting to MongoDB Atlas:", error);
+    });
