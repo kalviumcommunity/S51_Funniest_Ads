@@ -17,32 +17,20 @@ function Forms() {
             firstname: data.firstname,
             lastname: data.lastname,
             email: data.email,
-            password: data.password
+            password: data.password,
+            country: data.country // Include the country field in the data sent to the backend
         })
         .then((res) => {
             console.log(res);
-            // const timestamp = Date.now();
-            // document.cookie = `${data.lastname}=${data.firstname} ; path=/`;
-            cookies.set("username", data.lastname)
-            
+            cookies.set("username", data.lastname);
         })
         .catch(error => console.error(error));
     };
-
-    // useEffect((data) => {
-    //     submit(data)
-    // }, [])
-
-    // const deleteCookie = () => {
-    //     // document.cookie = `${data.lastname}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`
-    //     cookies.remove("some")
-    // }
  
     return (
         <div>
             <form onSubmit={handleSubmit(submit)} className="form-container">
                 {isSubmitSuccessful && <div className="success-message">Registration Successful</div>}
-                {/* <button onClick={deletee("username")}>dfuhj</button> */}
 
                 <div className="form-group">
                     <label htmlFor='firstname'>Enter your firstname</label>
@@ -96,14 +84,21 @@ function Forms() {
                     {errors.password && <span className="error-message">{errors.password.message}</span>}
                 </div>
 
+                <div className="form-group">
+                    <label htmlFor='country'>Enter your country</label>
+                    <input type='text' placeholder='Enter your country' id='country'
+                        {...register("country", {
+                            required: "Your country is required"
+                        })}
+                    />
+                    {errors.country && <span className="error-message">{errors.country.message}</span>}
+                </div>
+
                 <input type='submit' value="Register" className="submit-btn" />
                 {isSubmitSuccessful && <button><Link to='/'>Go back</Link></button>}
-                {/* <button onClick={deleteCookie}>delete</button> */}
-
             </form>
         </div>
     );
 }
 
 export default Forms;
- 
