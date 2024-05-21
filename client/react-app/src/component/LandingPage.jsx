@@ -47,7 +47,6 @@ const LandingPage = () => {
     const handleCountryChange = (e) => {
         const selectedCountry = e.target.value;
         setSelectedCountry(selectedCountry);
-        // Filter users based on the selected country
         if (selectedCountry === '') {
             setFilteredData(data); 
         } else {

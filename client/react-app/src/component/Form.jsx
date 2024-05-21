@@ -28,7 +28,7 @@ function Forms() {
     };
  
     return (
-        <div>
+        <div>\
             <form onSubmit={handleSubmit(submit)} className="form-container">
                 {isSubmitSuccessful && <div className="success-message">Registration Successful</div>}
 
