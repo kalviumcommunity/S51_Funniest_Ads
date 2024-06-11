@@ -1,19 +1,18 @@
 const express = require('express');
 const mongoose = require("mongoose");
 const cors = require("cors");
-const cookie = require("cookie-parser")
+const cookieParser = require("cookie-parser");
 const User = require('./modals/UserModal.js');
 const joi = require('joi');
-
 
 const app = express();
 const port = 3000;
 
 app.use(express.json());
 app.use(cors());
-app.use(cookie())
+app.use(cookieParser());
 
-// GET request 
+// GET request
 app.get('/api/users', async (req, res) => {
     try {
         const users = await User.find();
@@ -28,7 +27,7 @@ app.get('/api/users', async (req, res) => {
 app.get('/api/users/:id', async (req, res) => {
     try {
         const id = req.params.id;
-        const user = await User.findById({_id:id}); // Just pass the id directly
+        const user = await User.findById(id);
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
@@ -39,15 +38,14 @@ app.get('/api/users/:id', async (req, res) => {
     }
 });
 
-
 const schema = joi.object({
-    firstname : joi.string().required(),
-    lastname : joi.string().required(),
-    email : joi.string().email().required(),
-    password : joi.string().min(8) // Minimum length of 8 characters
-    .max(20), // Maximum length of 30 characters
-    country : joi.string()
-  })
+    firstname: joi.string().required(),
+    lastname: joi.string().required(),
+    email: joi.string().email().required(),
+    password: joi.string().min(8).max(20) // Minimum length of 8 characters, maximum length of 20 characters
+});
+
+
 
 // POST request
 app.post('/createUsers', async (req, res) => {
@@ -80,8 +78,6 @@ app.post('/createUsers', async (req, res) => {
         return res.status(500).send("Error creating user in the database");
     }
 });
-  
-
 
 // PUT request by id
 app.put('/api/users/:id', async (req, res) => {
@@ -97,21 +93,17 @@ app.put('/api/users/:id', async (req, res) => {
 // DELETE request by id
 app.delete('/api/users/:id', async (req, res) => {
     try {
-      const deletedUser = await User.findByIdAndDelete(req.params.id);
-  
-      // Delete the 'username' cookie (if it exists)
-    //   const { firstname, lastname } = req.body;
+        const deletedUser = await User.findByIdAndDelete(req.params.id);
 
-    res.clearCookie("username");
+        // Delete the 'username' cookie (if it exists)
+        res.clearCookie("username");
 
-  
-      return res.json({ deletedUser, message: 'User and cookie deleted successfully' });
+        return res.json({ deletedUser, message: 'User and cookie deleted successfully' });
     } catch (err) {
-      console.error("Error deleting user:", err);
-      res.status(500).send("Error deleting user from the database");
+        console.error("Error deleting user:", err);
+        res.status(500).send("Error deleting user from the database");
     }
-  });
-  
+});
 
 app.get('/ping', (req, res) => {
     res.send("Hello World");
@@ -124,7 +116,6 @@ app.get('/', (req, res) => {
 app.use((req, res) => {
     res.status(404).send("ERROR");
 });
-
 
 mongoose.connect("mongodb+srv://adityakannur:Aditya252004@cluster0.5zhqbdd.mongodb.net/FunniestAds_Database?retryWrites=true&w=majority")
     .then(() => {
