@@ -28,7 +28,7 @@ function Forms() {
     };
  
     return (
-        <div>
+        <div>\
             <form onSubmit={handleSubmit(submit)} className="form-container">
                 {isSubmitSuccessful && <div className="success-message">Registration Successful</div>}
 
@@ -84,7 +84,7 @@ function Forms() {
                     {errors.password && <span className="error-message">{errors.password.message}</span>}
                 </div>
 
-                <div className="form-group">
+                {/* <div className="form-group">
                     <label htmlFor='country'>Enter your country</label>
                     <input type='text' placeholder='Enter your country' id='country'
                         {...register("country", {
@@ -92,7 +92,7 @@ function Forms() {
                         })}
                     />
                     {errors.country && <span className="error-message">{errors.country.message}</span>}
-                </div>
+                </div> */}
 
                 <input type='submit' value="Register" className="submit-btn" />
                 {isSubmitSuccessful && <button><Link to='/'>Go back</Link></button>}
